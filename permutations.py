@@ -1,18 +1,16 @@
 # Simple scipt to find variations of a word.
-#Version 1.5
+#Version 1.6
+#Thanks to Yiab for the help making this far more efficient.
 
 #import permutations module from itertools library
-from itertools import permutations
+from itertools import product
 
 #Set string to user input with warning that word has to be lowercase.
 s = input("Warning!  Word must be lower case.  Enter word: ")
-#Set variable that takes string length from input.
-wordl = len(s)
 
-#Set up a list of the user input, and upper and lower case additions of it.
-lis2 = list(s)+list(s.upper())+list(s.lower())
+#looks for all upper and lower case variations
+letters = [{ a.upper(), a.lower() } for a in s]
+#provides the answer in a list
+answer = list(map(''.join,product(*letters)))
 
-#for loop that iterated through the string list by the length of the string.  Prints the permutations.
-for x in permutations(lis2, wordl):
-    if ''.join(x).lower()==s:
-        print(''.join(x))
+print(answer)
